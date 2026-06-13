@@ -25,7 +25,7 @@ export default function AdminDashboard({ user }: AdminDashboardProps) {
   return (
     <div className="flex flex-col h-screen bg-surface">
       <AdminHeader user={user} onLogout={handleLogout} />
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
         <AdminSidebar activeModule={activeModule} onSelect={setActiveModule} />
         <div className="flex-1 overflow-y-auto p-6">
           <DashboardView />

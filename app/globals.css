@@ -1,18 +1,36 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Montserrat:wght@400;500;600;700&display=swap'); */
 
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
 
+@theme {
+  /* ── Color Tokens ── */
+  --color-ink: #0B1420;
+  --color-ink2: #1E2D45;
+  --color-muted: #7A8FA6;
+  --color-border: #D8E3EE;
+  --color-surface: #F5F8FC;
+  --color-navy: #0B1F3A;
+  --color-navy2: #122846;
+  --color-teal: #0676A8;
+  --color-teal2: #0A94D4;
+
+  /* ── Font Families ── */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-mono: 'Montserrat', ui-monospace, monospace;
+}
+
+/* ── Base Styles ── */
 html, body {
   height: 100%;
   width: 100%;
 }
 
 body {
-  @apply bg-surface text-ink;
+  @apply bg-surface text-ink font-sans;
 }
 
+/* ── Custom Scrollbar ── */
 ::-webkit-scrollbar {
   width: 4px;
 }
