@@ -30,6 +30,7 @@ export async function proxy(request: NextRequest) {
   const isResetPassword = pathname === "/auth/reset-password"
 
   const isAuthPage = isLogin || isRegister || isForgotPassword || isResetPassword
+  const hasToken = request.nextUrl.searchParams.has("token")
 
   // 4. Protection for Unauthenticated Users
   if (!session) {
@@ -47,15 +48,15 @@ export async function proxy(request: NextRequest) {
 
   // 5a. If email is NOT verified
   if (!emailVerified) {
-    // Force user to wait at the verify-email page
-    if (!isVerifyEmail) {
+    // Force user to wait at the verify-email page, unless resetting password with a token
+    if (!isVerifyEmail && !(isResetPassword && hasToken)) {
       return NextResponse.redirect(new URL("/auth/verify-email", request.url))
     }
     return NextResponse.next()
   }
 
-  // 5b. If email IS verified, they shouldn't access verify-email or auth pages
-  if (isVerifyEmail || isAuthPage) {
+  // 5b. If email IS verified, they shouldn't access verify-email or auth pages, unless resetting password with a token
+  if (isVerifyEmail || (isAuthPage && !(isResetPassword && hasToken))) {
     return NextResponse.redirect(new URL(isAdmin ? "/admin" : "/blank", request.url))
   }
 
