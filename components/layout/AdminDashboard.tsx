@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { User } from '@/types'
+import { useAuthStore } from '@/lib/authStore'
+import { authClient } from '@/lib/auth-client'
 import AdminHeader from './AdminHeader'
 import AdminSidebar from './AdminSidebar'
 import DashboardView from '@/components/modules/DashboardView'
@@ -14,9 +16,14 @@ interface AdminDashboardProps {
 export default function AdminDashboard({ user }: AdminDashboardProps) {
   const router = useRouter()
   const [activeModule, setActiveModule] = useState('dashboard')
+  const logout = useAuthStore((state) => state.logout)
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     if (confirm('Are you sure you want to sign out?')) {
+      try {
+        await authClient.signOut()
+      } catch (e) {}
+      logout()
       localStorage.removeItem('user')
       router.push('/auth/login')
     }

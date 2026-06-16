@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import {
   HiShieldCheck,
   HiLockClosed,
@@ -100,12 +101,19 @@ export default function LoginForm({ onSubmit, error }: LoginFormProps) {
               <input type="checkbox" className="cursor-pointer" />
               <span className="text-muted">Remember me</span>
             </label>
-            <a href="#" className="text-teal hover:underline">Forgot password?</a>
+            <Link href="/auth/forgot-password" className="text-teal hover:underline">Forgot password?</Link>
           </div>
 
           <button type="submit" className="w-full py-2.5 bg-gradient-to-r from-teal to-teal2 text-white rounded-lg text-sm font-semibold hover:shadow-lg transition-all cursor-pointer">
             Sign In
           </button>
+
+          <p className="mt-6 text-center text-sm text-muted">
+            Don't have an account?{' '}
+            <a href="/auth/register" className="text-teal hover:underline font-medium">
+              Create one
+            </a>
+          </p>
 
           <div className="mt-6 p-3 bg-surface rounded-lg text-center text-xs text-muted">
             <p className="font-medium mb-2">Demo credentials:</p>

@@ -1,7 +1,8 @@
 export interface User {
-  id?: number
+  id?: string | number
   name: string
   email: string
   initials: string
-  role: string
+  role?: string
+  nhsTrust?: string
 }
